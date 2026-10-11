@@ -1,1 +1,115 @@
-Initializing
+# Repolex Knowledge Graph of jazzband/docopt-ng
+
+RDF knowledge graph data for [jazzband/docopt-ng](https://github.com/jazzband/docopt-ng), parsed by [repolex](https://repolex.ai).
+
+> **Note**: This data is experimental and subject to change without notice.
+
+## How to use this data
+
+The easiest way to get started is to install the [rlex](https://github.com/repolex-ai/rlex) query tool:
+
+```bash
+cargo install --git https://github.com/repolex-ai/rlex
+```
+
+Verify the install:
+
+```bash
+rlex --help
+```
+
+**rlex is designed to be used primarily by LLMs in a terminal.** Start up your favorite AI assistant and ask it to use rlex. It handles the SPARQL — you just ask questions in plain English.
+
+To load this repo's data:
+
+```bash
+rlex download jazzband/docopt-ng
+```
+
+Consult `rlex --help` for other options, including SPARQL queries, HTTP server, and interactive visualization.
+
+## Data structure
+
+All data is stored as gzip-compressed [N-Quads](https://www.w3.org/TR/n-quads/) (`.nq.gz`), a standard RDF format that can be loaded into any triplestore or graph database.
+
+```
+.
+├── aggregate
+│   ├── ast
+│   │   └── 587f41a61437b680b4215de1874fb6975d8a49d6
+│   │       └── chunk-001.nq.gz
+│   └── repolex
+│       └── 587f41a61437b680b4215de1874fb6975d8a49d6
+│           └── chunk-001.nq.gz
+├── blob
+│   ├── 02e0e381c48576df533081542c4f9a06ba8622a6.nq.gz
+│   ├── 0bbe4305e23b79680d4a4230bc24fae55b291fed.nq.gz
+│   ├── 1298b087f3f91b0768c68bd4cef737312c3187bd.nq.gz
+│   ├── 26500af2b9f2c606fc2ca2fb02c1f8099e8e7f1d.nq.gz
+│   ├── 32675609bd38f86e5aed22ce5afa0599767588c6.nq.gz
+│   ├── 3e2f46a3a380a51095d54222dfd5d4a331c92458.nq.gz
+│   ├── 4336dd4d64c2164f299aaeff6885a6e83eb08b27.nq.gz
+│   ├── 4e6c39940a84dd52741f8a15af69369083e22b0d.nq.gz
+│   ├── 50a64ef604f5603f08ee5b92148faccef55e7355.nq.gz
+│   ├── 58ff1bc8e7a072c5dd16eb64a0010d91881938e4.nq.gz
+│   ├── 5af02f076616933680648d5e503133eff7000768.nq.gz
+│   ├── 643407b2be6684340db3de70fb7bba6467d9d915.nq.gz
+│   ├── 73ea2f7b534ff39202a58a3b42ceaa57854f3344.nq.gz
+│   ├── 7666eed025411ff6624e688323d777766b8b8d13.nq.gz
+│   ├── 881874a1606dd4d260cf85bfe48c5b791728065c.nq.gz
+│   ├── 8d294cd0b97a6e3398c5b8251390b9d2e0c20958.nq.gz
+│   ├── 932a90498a2bcd3859b77d7c6a77f30fbda7f104.nq.gz
+│   ├── 938a420a936969255d420006de1ffbf496d4d549.nq.gz
+│   ├── 977f7106178aa9f6c845164be0383dc7f504616b.nq.gz
+│   ├── 9becfd84fff5d90415e2ef0f8218519ce6503251.nq.gz
+│   ├── a2fa7ecfa38a4268880549ce6d653e979058f098.nq.gz
+│   ├── ad78220bf6ae7568b9e1aff6428f7851beaa7865.nq.gz
+│   ├── aff1e6893d08e27fbf2c8f332dad774b6e2aa296.nq.gz
+│   ├── b1e92b42bb9fa06c06e5de56a5e21573a98e7f11.nq.gz
+│   ├── b3a5665bfb9f3edbb6b2394eb8d5cd2ae3ab067b.nq.gz
+│   ├── b578dd1df8f916b70dc9501d99ae73d7b8816f44.nq.gz
+│   ├── ba7a8f3e34eb0eaf69f06d19d4dc9e8c94290bd8.nq.gz
+│   ├── c31642d4e64b3a362273a5e60f587a0c3e471630.nq.gz
+│   ├── c6eba5130541f65d13a66c90e3e8ea636fd12955.nq.gz
+│   ├── ca46bb243d9de44369032d0a74bae8541958d2ec.nq.gz
+│   ├── ca76de5703000d779031c0a5a4323d95a6fce68f.nq.gz
+│   ├── db1dbe1d7984b3b248e194b881dc7be0bd06e647.nq.gz
+│   ├── e0d5efab56fb94577e7804603eb6f21f36977cb2.nq.gz
+│   ├── e548c0dd6e8baef3a5435aea6b2e8be06ed83228.nq.gz
+│   ├── e69de29bb2d1d6434b8b29ae775ad8c2e48c5391.nq.gz
+│   └── fd3ea73d8240ba231820d86929269acb8aa059bb.nq.gz
+├── branch
+│   └── branch.nq.gz
+├── commit
+│   └── commit.nq.gz
+├── filetree
+│   └── 587f41a61437b680b4215de1874fb6975d8a49d6.nq.gz
+├── issue
+│   └── issue.nq.gz
+├── pr
+│   └── pr.nq.gz
+└── tag
+    └── tag.nq.gz
+
+13 directories, 44 files
+```
+
+| Directory | What it contains |
+|-----------|-----------------|
+| `blob/` | Per-file AST graphs, content-addressed by git blob SHA. Each file in the source repo gets its own graph. |
+| `aggregate/ast/` | Combined AST graph per parsed commit. Merges all blob graphs for a snapshot of the entire codebase at that point. |
+| `aggregate/lsp/` | Language Server Protocol enrichment: resolved symbols, definitions, references, and type information. |
+| `aggregate/dataflow/` | Interprocedural data flow edges between functions and modules. |
+| `aggregate/repolex/` | Combined graph (AST + LSP + dataflow) per commit. |
+| `commit/` | Git commit metadata (author, date, message, parent links). |
+| `branch/` | Branch metadata. |
+| `tag/` | Tag metadata. |
+| `filetree/` | File tree snapshots per commit (which files existed and their blob SHAs). |
+| `audit/` | Code architecture and graph audit reports per commit. |
+
+## Source repository
+
+[jazzband/docopt-ng](https://github.com/jazzband/docopt-ng)
+
+---
+*Parsed on 2026-10-11 by [repolex](https://repolex.ai)*
